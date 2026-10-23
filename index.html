@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>Browser File Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">⌘</div><div><strong>Browser File Studio</strong><small>Local-first file editor</small></div></div>
+    <div class="top-actions">
+      <button id="newBtn" class="button">＋ New file</button>
+      <button id="downloadBtn" class="button primary">↓ Download</button>
+      <button id="downloadAllBtn" class="button">⇩ Export project</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="side-head"><span>PROJECT FILES</span><button id="addBtn" class="icon-button" title="New file">＋</button></div>
+      <div id="fileList" class="file-list"></div>
+      <div class="sidebar-bottom">
+        <button id="importBtn" class="wide-button">↑ Import file</button>
+        <input id="fileInput" type="file" multiple hidden>
+        <p>Files are kept in this browser until you download or export them.</p>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <div class="tabs-row"><div id="tabs" class="tabs"></div><div id="saveState" class="save-state">Saved locally</div></div>
+      <div class="editor-toolbar">
+        <div class="file-title"><span id="fileIcon">TXT</span><input id="filename" aria-label="File name" spellcheck="false"></div>
+        <div class="toolbar-actions">
+          <button id="renameBtn" class="text-button">Rename</button>
+          <button id="duplicateBtn" class="text-button">Duplicate</button>
+          <button id="deleteBtn" class="text-button danger">Delete</button>
+        </div>
+      </div>
+      <div class="editor-wrap">
+        <div id="lineNumbers" class="line-numbers">1</div>
+        <textarea id="editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="File editor" placeholder="अपना कोड या टेक्स्ट यहाँ लिखें..."></textarea>
+      </div>
+      <footer class="statusbar"><span id="languageStatus">Plain text</span><span id="cursorStatus">Ln 1, Col 1</span><span id="wordStatus">0 words · 0 chars</span></footer>
+    </section>
+  </main>
+
+  <dialog id="newDialog">
+    <form method="dialog" id="newForm">
+      <div class="dialog-head"><h2>Create a file</h2><button class="icon-button" value="cancel" aria-label="Close">×</button></div>
+      <label for="newName">File name</label>
+      <input id="newName" placeholder="example.js" required>
+      <div class="suggestions">
+        <button type="button" data-ext="txt">.txt</button><button type="button" data-ext="md">.md</button>
+        <button type="button" data-ext="html">.html</button><button type="button" data-ext="css">.css</button>
+        <button type="button" data-ext="js">.js</button><button type="button" data-ext="py">.py</button>
+        <button type="button" data-ext="json">.json</button><button type="button" data-ext="xml">.xml</button>
+      </div>
+      <div class="dialog-actions"><button class="button" value="cancel">Cancel</button><button id="createBtn" class="button primary" value="default">Create file</button></div>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
